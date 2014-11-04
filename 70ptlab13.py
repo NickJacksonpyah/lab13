@@ -15,6 +15,14 @@ root = Tk()
 drawpad = Canvas(root, width=800,height=600, background='white')
 player = drawpad.create_oval(390,580,410,600, fill="red")
 
+# enemy
+enemy = drawpad.create_oval(50,50,100,100, fill="blue")
+# enemys
+enemys = drawpad.create_oval(200,200,250,250, fill="green")
+# enemyx
+enemyx =  drawpad.create_oval(400,400,450,450, fill="orange")
+
+
 class MyApp:
 	def __init__(self, parent):
        	    global drawpad
@@ -48,10 +56,21 @@ class MyApp:
        	    self.button4.configure(text="down", background= "green")
        	    self.button4.pack(side=LEFT)
        	    self.button4.bind("<Button-1>", self.down)
+       	    self.animate()
 	
 	def animate(self):
 	    global drawpad
 	    global player
+            global enemy
+            global enemys
+            global enemyx
+            drawpad.move(enemyx, 1, 0)
+            drawpad.move(enemys, 1, 0)
+            drawpad.move(enemy, 1, 0)
+            
+            
+            drawpad.after(10,self.animate) 
+
 	    
 	def left(self, event):   
 	   global oval
@@ -71,9 +90,7 @@ class MyApp:
 	def down(self, event):   
 	   global oval
 	   global player
-	   drawpad.move(player,0,20)
-		
-		
+	   
 		
 myapp = MyApp(root)
 root.mainloop()
